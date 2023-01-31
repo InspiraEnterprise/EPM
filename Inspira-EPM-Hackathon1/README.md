@@ -16,5 +16,5 @@ Onboarded Opensource Extension to Edge browser By Following the Steps
 Step 3:                                                                                                                                                                 
 Open Browser, after opening                                                                                                                                             
        1)	Entra admin Page                                                                                                                                              
-       2)	Click to  Reload button on  the Open source Browser Extension Which installed in Extension Page every time you modified the code.                             
+       2)	Click to  Reload button on  the Open source Browser Extension Which installed in Extension Page every time you modified the code.                          
  
