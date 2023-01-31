@@ -1,0 +1,167 @@
+{
+    "definition": {
+        "$schema": https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#,
+        "actions": {
+            "For_each": {
+                "actions": {
+                    "Parse_the_Data_and_fetch_the_Content": {
+                        "inputs": {
+                            "body": {
+                                "best_of": 1,
+                                "frequency_penalty": 0,
+                                "max_tokens": 100,
+                                "n": 1,
+                                "presence_penalty": 0,
+                                "prompt": "get subject, and importance in json format this to ingest into log analytics workspace@{items('For_each')?['body']}",
+                                "temperature": 1
+                            },
+                            "host": {
+                                "connection": {
+                                    "name": "@parameters('$connections')['openaiip']['connectionId']"
+                                }
+                            },
+                            "method": "post",
+                            "path": "/v1/engines/text-davinci-003/completions"
+                        },
+                        "runAfter": {},
+                        "type": "ApiConnection"
+                    },
+                    "Send_to_EPM-Custom_Log_Table": {
+                        "actions": {
+                            "Send_Data": {
+                                "inputs": {
+                                    "body": "@items('Send_to_EPM-Custom_Log_Table')?['text']",
+                                    "headers": {
+                                        "Log-Type": "EntraPM",
+                                        "time-generated-field": "@{utcNow()}"
+                                    },
+                                    "host": {
+                                        "connection": {
+                                            "name": "@parameters('$connections')['azureloganalyticsdatacollector']['connectionId']"
+                                        }
+                                    },
+                                    "method": "post",
+                                    "path": "/api/logs"
+                                },
+                                "runAfter": {},
+                                "type": "ApiConnection"
+                            }
+                        },
+                        "foreach": "@body('Parse_the_Data_and_fetch_the_Content')?['choices']",
+                        "runAfter": {
+                            "Parse_the_Data_and_fetch_the_Content": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "Foreach"
+                    }
+                },
+                "foreach": "@body('Get_Report')?['value']",
+                "runAfter": {
+                    "Get_Report": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Foreach"
+            },
+            "Get_Report": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['office365']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/v3/Mail",
+                    "queries": {
+                        "fetchOnlyFlagged": false,
+                        "fetchOnlyUnread": false,
+                        "fetchOnlyWithAttachment": false,
+                        "folderPath": "Id::<outlook-folder-path>",
+                        "importance": "Any",
+                        "includeAttachments": false,
+                        "subjectFilter": "Alert",
+                        "top": 1
+                    }
+                },
+                "metadata": {
+                    "Id::<outlook-folder-path>": "EPM "
+                },
+                "runAfter": {},
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_a_new_Report_Arrives_in_Mailbox": {
+                "inputs": {
+                    "fetch": {
+                        "method": "get",
+                        "pathTemplate": {
+                            "template": "/v3/Mail/OnNewEmail"
+                        },
+                        "queries": {
+                            "fetchOnlyWithAttachment": false,
+                            "folderPath": "Id::<outlook-folder-path>",
+                            "from": no-reply-ciem@microsoft.com,
+                            "importance": "Any",
+                            "includeAttachments": false
+                        }
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['office365']['connectionId']"
+                        }
+                    },
+                    "subscribe": {
+                        "body": {
+                            "NotificationUrl": "@{listCallbackUrl()}"
+                        },
+                        "method": "post",
+                        "pathTemplate": {
+                            "template": "/GraphMailSubscriptionPoke/$subscriptions"
+                        },
+                        "queries": {
+                            "fetchOnlyWithAttachment": false,
+                            "folderPath": "Id::<outlook-folder-path>",
+                            "importance": "Any"
+                        }
+                    }
+                },
+                "metadata": {
+                    "Id::<outlook-folder-path>": "EPM "
+                },
+                "splitOn": "@triggerBody()?['value']",
+                "type": "ApiConnectionNotification"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "azureloganalyticsdatacollector": {
+                    "connectionId": "/subscriptions/<subscriptionID>/resourceGroups/<RGNAME>/providers/Microsoft.Web/connections/<Connector>",
+                    "connectionName": "<Connector>",
+                    "id": "/subscriptions/<subscriptionID>/providers/Microsoft.Web/locations/centralindia/managedApis/azureloganalyticsdatacollector"
+                },
+                "office365": {
+                    "connectionId": "/subscriptions/<subscriptionID>/resourceGroups/<RGNAME>/providers/Microsoft.Web/connections/<Connector>",
+                    "connectionName": "<Connector>",
+                    "id": "/subscriptions/<subscriptionID>/providers/Microsoft.Web/locations/centralindia/managedApis/office365"
+                },
+                "openaiip": {
+                    "connectionId": "/subscriptions/<subscriptionID>/resourceGroups/<RGNAME>/providers/Microsoft.Web/connections/openaiip",
+                    "connectionName": "openaiip",
+                    "id": "/subscriptions/<subscriptionID>/providers/Microsoft.Web/locations/centralindia/managedApis/openaiip"
+                }
+            }
+        }
+    }
+}
