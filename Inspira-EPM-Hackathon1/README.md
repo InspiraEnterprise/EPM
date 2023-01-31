@@ -1,8 +1,13 @@
 <---  HOW TO USE IT  ---->                                                                                                                                              
   // It's Simple //                                                                                                                                                  
 STEP1:                                                                                                                                       
-Installed the Visual Studio Code Software Development tool. And open Inspira-EMP-Hackathon1 local folder on Visual Studio.                                                                                                                                                                                                                       
-STEP2:                                                                                                                                                                  
+Installed the Visual Studio Code Software Development tool. And open Inspira-EMP-Hackathon1 local folder on Visual Studio.   
+
+STEP2(OPTIONAL):
+ 1)Open Visual Studio > Open downloaded folder
+ 2)You can customize the appearance by editing the style.css or add more contents in content.js  
+
+STEP3:                                                                                                                                                                  
 Onboarded Opensource Extension to Edge browser By Following the Steps                                                                                                   
      1)Open a Setting and More Option on the edge                                                                                                                       
           *)Click on Extension                                                                                                                                          
