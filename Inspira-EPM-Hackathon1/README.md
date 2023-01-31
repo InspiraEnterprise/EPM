@@ -1,6 +1,7 @@
 <---  HOW TO USE IT  ---->
   // It's Simple //
-  
+ <HTML>
+  <BODY>
 STEP1:
 Installed the Visual Studio Code Software Development tool. And open Inspira-EMP-Hackathon1 local folder on Visual Studio.
       
@@ -19,4 +20,5 @@ Step 3:
       Open Browser, after opening
            1)	Entra admin Page
            2)	Click to  Reload button on  the Open source Browser Extension Which installed in Extension Page every time you modified the code 
-
+  </BODY>
+</HTML>
