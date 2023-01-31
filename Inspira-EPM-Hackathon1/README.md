@@ -5,7 +5,7 @@ STEP1:
 Installed the Visual Studio Code Software Development tool. And open Inspira-EMP-Hackathon1 local folder on Visual Studio.
       
 STEP2:
-Onboarded Opensource Extension to Edge browser By Following the Steps
+Onboarded Opensource Extension to Edge browser By Following the Steps ------------------------------------>
 1)Open a Setting and More Option on the edge 
 *)Click on Extension.
 *)Click on Manage Extensions to open the Extensions Page in Edge Browser
