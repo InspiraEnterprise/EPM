@@ -1,6 +1,6 @@
 <---How to Use It ---->
 Please copy the json code to a blank logic app.
-Pre-requisites 
+Pre-requisites .
     1. Logic App Contributor Role
     2. Log Analytics contributor role
     3. either use a system assigned managed identity to ingest logs into workspace.
