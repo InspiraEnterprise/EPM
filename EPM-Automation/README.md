@@ -3,7 +3,7 @@ Please copy the json code to a blank logic app.
 Pre-requisites 
     1. Logic App Contributor Role
     2. Log Analytics contributor role
-    3. either use a system assigned managed identity to ingest logs into workspace
+    3. either use a system assigned managed identity to ingest logs into workspace.
     4. API key from Open Ai 
         to obtain this key you can navigate to -https://platform.openai.com/overview
             Go to profile and generate a key from there to use in your logic app.
