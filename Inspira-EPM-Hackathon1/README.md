@@ -1,5 +1,5 @@
 <---  HOW TO USE IT  ---->                                                                                                                                              
-  // It's Simple //   --------------------------------------------------------------------------------------------------------------------------------                                                                                                                                                 
+  // It's Simple //                                                                                                                                                  
 STEP1:                                                                                                                                       
 Installed the Visual Studio Code Software Development tool. And open Inspira-EMP-Hackathon1 local folder on Visual Studio.                                                                                                                                                                                                                       
 STEP2:                                                                                                                                                                  
