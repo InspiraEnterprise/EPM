@@ -1,0 +1,46 @@
+.epmg-tooltip {
+    position: relative;
+    z-index: 12;
+}
+
+.epmg-tooltip:hover + .epmg-tooltip {
+    display: block;
+}
+.epmg-tooltip .epmg-tooltipcontainer {
+    min-width: 16em;
+    min-height: 4em; 
+    background: #69ada2;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+    /* Position the tooltip text */
+    position: absolute;
+    /*z-index: 9999 !important; */
+    top: 50px;
+    transform: translateX(-50%);
+    box-shadow: 2px 2px 5px rgba(128, 225, 245, 0.515);
+}
+
+/* Tooltip text */
+.epmg-tooltip .epmg-tooltiptext {
+    color: rgb(245, 245, 245);
+    text-transform: capitalize;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.epmg-tooltip:hover .epmg-tooltipcontainer {
+    visibility: visible;
+    opacity: 1;
+}
+.helper-container {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    z-index: 9999;
+}
+
+.helper-container img {
+    max-width: 10em;
+}

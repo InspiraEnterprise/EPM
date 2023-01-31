@@ -1,0 +1,40 @@
+{
+    "manifest_version": 3,
+    "name": "Inspira EPM whiZ",
+    "version": "2.0",
+    "description": "Edge Extension for Entra Permissions Management",
+    "icons": {
+        "1": "images/conicon1.png",
+        "2": "images/conicon2.png",
+        "3": "images/conicon3.png",
+        "4": "images/conicon4.png"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "images/*",
+                "styles/*",
+                "data/*"
+            ],
+            "matches": [
+                "http://localhost:5500/*",
+                "https://*.cloudknox.io/*"
+            ]
+        }
+    ],
+    "content_scripts": [
+        {
+            "js": [
+                "scripts/content.js"
+            ],
+            "css": [
+                "styles/style.css"
+            ],
+            "matches": [
+                "https://*.cloudknox.io/*",
+                "http://localhost:5500/*"
+            ]
+        }
+        
+    ]
+}
